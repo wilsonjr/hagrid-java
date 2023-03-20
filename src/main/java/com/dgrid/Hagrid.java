@@ -21,29 +21,7 @@ public class Hagrid {
     private static final String method = "hilbert";
     private static final boolean keep_aspect_ratio = true;
     private static final boolean round = true;
-    
-//    private static long[] rotate(long size, long px, long py, long rx, long ry) {
-//        if (ry == 0) {
-//            if (rx == 1) {
-//                px = size - 1 - px;
-//                py = size - 1 - py;
-//            }
-//            
-//            return new long[]{py, px};
-//        }
-//        return new long[]{px, py};
-//    }
-    
-//    function rotate(size, px, py, rx, ry) {
-//        if (ry == 0) {
-//            if (rx == 1) {
-//                px = size - 1 - px;
-//                py = size - 1 - py;
-//            }
-//            return [py, px];
-//        }
-//        return [px, py];
-//    }
+  
     
     public static long[] rotate(long size, long px, long py, boolean rx, boolean ry) {
         if (!ry) {
@@ -72,30 +50,7 @@ public class Hagrid {
         }
         return n;
     }
-
-//    private static long  hilbert_encode(long[] p, long size) {
-//        
-//        long n = 0;
-//        for (var s = size / 2; s > 0; s /= 2) {
-//            long rx =  ((p[0] & s) > 0) ? 1 : 0;
-//            long ry = ((p[1] & s) > 0) ? 1 : 0;
-//            n += (s*s) * ((3 * p[0]) ^ p[1]);
-//            p = rotate(size, p[0], p[1], rx, ry);
-//        }
-//        return n;
-//    }
     
-//    export function hilbert_encode([px, py], size) {
-//        let n = 0;
-//        for (let s = size / 2; s > 0; s /= 2) {
-//            const rx = (px & s) > 0;
-//            const ry = (py & s) > 0;
-//            n += (s ** 2) * ((3 * rx) ^ ry);
-//            [px, py] = rotate(size, px, py, rx, ry);
-//        }
-//        return n;
-//    }
-
     private static long[] hilbert_decode(long n, long size) {
         long  t = n;
         long  px = 0, py = 0;
@@ -117,28 +72,12 @@ public class Hagrid {
         return new long[]{px, py};
     }
     
-//    export function hilbert_decode(n, size) {
-//        let t = n;
-//        let [px, py] = [0, 0];
-//        for (let s = 1; s < size; s *= 2) {
-//            const rx = 1 & (t / 2);
-//            const ry = 1 & (t ^ rx);
-//            [px, py] = rotate(s, px, py, rx, ry);
-//            px += (s * rx);
-//            py += (s * ry);
-//            t = t >> 2;
-//        }
-//        return [px, py];
-//    }
-    
-    
-    
     private static boolean valid(long p, long e) {
         return p >= 0 && p <= e;
     }
     
     private static double distance(long[] a, long[] b) {
-        return Math.hypot(b[0] - a[0], b[1] - a[1]);//Math.sqrt(Math.pow(ax - bx, 2) + Math.pow(ay - by, 2));
+        return Math.hypot(b[0] - a[0], b[1] - a[1]);
     }
 
     private static void hilbert_collision(HashMap<Long, Long> P, long p, long[] d, long i, long size) {
@@ -180,12 +119,8 @@ public class Hagrid {
     
     
     private static List<Function<Point2D.Double, Long>> get_scales(List<Point2D.Double> data, long[][] X) {
-       //        [[X_min, X_max], [Y_min, Y_max]]
-        
        Function<Point2D.Float, Float> x = n -> n.x;
        Function<Point2D.Float, Float> y = n -> n.y;
-       
-       
        
        double X_max = X[0][1];
        double X_min = X[0][0];
@@ -225,25 +160,12 @@ public class Hagrid {
      
        
        Function<Point2D.Double, Long> x_scale = d -> {
-//           System.out.println("d.x: "+d.x);
-//           System.out.println("x_min: "+x_min);
-//            System.out.println("x_span: "+x_span);
-//            System.out.println("X_span: "+X_span);
-//            System.out.println("X_min: "+X_min);
            return Math.round((d.x - x_min) / x_span * X_span + X_min);
        }; 
        
        Function<Point2D.Double, Long> y_scale = d -> {
-//           System.out.println("d.y: "+d.y);
-//           System.out.println("y_min: "+y_min);
-//            System.out.println("y_span: "+y_span);
-//            System.out.println("Y_span: "+Y_span);
-//            System.out.println("Y_min: "+Y_min);
            return Math.round((d.y - y_min) / y_span * Y_span + Y_min);
        };
-       
-//       Math.round((1.0914481-0)/32*31+0)
-       
        
        var v = new ArrayList<Function<Point2D.Double, Long>>();
        v.add(x_scale);
