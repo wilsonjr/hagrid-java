@@ -36,7 +36,7 @@ public class HagridTest {
 
     public static void main(String[] args) {
         // 
-        String handle = "original_large";
+        String handle = "original";
         int N = 120;
         double[] whitespaces = new double[]{0.5, 1.0};
         
