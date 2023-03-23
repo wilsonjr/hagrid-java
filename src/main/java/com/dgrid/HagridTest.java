@@ -36,9 +36,9 @@ public class HagridTest {
 
     public static void main(String[] args) {
         // 
-        String handle = "original";
+        String handle = "original_large";
         int N = 120;
-        double[] whitespaces = new double[]{0.5, 1.0};
+        double[] whitespaces = new double[]{4.5};
         
         var runtimes = new ArrayList<>();
         var descriptions = new ArrayList<>();
@@ -48,7 +48,7 @@ public class HagridTest {
             for( int i = 1; i <= N; ++i ) {
                 String id = String.format("%1$4s", i).replace(' ', '0');
                 String path = handle+"/scatterplot["+id+"].csv";
-                String output_path = handle+"_hagrid_java/scatterplot["+id+"]_Hagrid_"+whitespace+".csv";
+                String output_path = handle+"_hagrid_java_4_5/scatterplot["+id+"]_Hagrid_"+whitespace+".csv";
                 
                 System.out.println(path +" -> "+ output_path);
             
